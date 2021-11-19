@@ -1,56 +1,46 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { Box } from "@mui/system";
+import { Paper } from "@mui/material";
 
 const data = {
   labels: ["1", "2", "3", "4", "5", "6"],
   datasets: [
     {
-      label: "# of Votes",
-      data: [12, 19, 3, 5, 2, 3],
-      fill: false,
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgba(255, 99, 132, 0.2)",
-      yAxisID: "y-axis-1",
+      label: "Kashif",
+      data: [120, 190, 30, 50, 20, 30],
     },
     {
-      label: "# of No Votes",
-      data: [1, 2, 1, 1, 2, 2],
-      fill: false,
-      backgroundColor: "rgb(54, 162, 235)",
-      borderColor: "rgba(54, 162, 235, 0.2)",
-      yAxisID: "y-axis-2",
+      label: "Azarul",
+      data: [120, 190, 30, 50, 20, 30],
+    },
+
+    {
+      label: "Joint",
+      data: [120, 190, 30, 50, 20, 30],
     },
   ],
 };
 
 const options = {
   scales: {
-    yAxes: [
-      {
-        type: "linear",
-        display: true,
-        position: "left",
-        id: "y-axis-1",
+    x: {
+      grid: {
+        display: false,
       },
-      {
-        type: "linear",
-        display: true,
-        position: "right",
-        id: "y-axis-2",
-        gridLines: {
-          drawOnArea: false,
-        },
+    },
+    y: {
+      grid: {
+        display: false,
       },
-    ],
+    },
   },
+  responsive: true,
+  maintainAspectRatio: false,
 };
 
 const LineChart = () => {
-  return (
-    <div>
-      <Line data={data} options={options} />
-    </div>
-  );
+  return <Line data={data} options={options} height="400" />;
 };
 
 export default LineChart;
