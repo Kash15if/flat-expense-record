@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserById } from "./actions";
+import { getChartData } from "./extraFunctions";
+import { getAllData } from "./actions";
 const initialState = {
   value: [],
   lineData: [],
-  PieData: {
+  pieData: {
     kashif: 0,
     azarul: 0,
   },
@@ -14,14 +15,13 @@ export const paidData = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchUserById.fulfilled]: (state, action) => {
-      // Add user to the state array
-      //console.log(action.payload);
+    [getAllData.fulfilled]: (state, action) => {
+      const { lineChartDaata, pieActual } = getChartData(action.payload);
+      state.lineData = lineChartDaata;
+      state.pieData = pieActual;
       state.value = action.payload;
     },
-    [fetchUserById.pending]: (state, action) => {
-      // Add user to the state array
-      //console.log(action.payload);
+    [getAllData.pending]: (state, action) => {
       state.value = "Loading";
     },
   },
@@ -31,5 +31,4 @@ export const paidData = createSlice({
 //export const { fetchUserById } = paidData.actions;
 
 export default paidData.reducer;
-
 //export const fetchUserById = fetchUserById;

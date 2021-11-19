@@ -1,7 +1,7 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchUserById } from "./Redux/actions";
+import { getAllData } from "./Redux/actions";
 //import { fetchUserById } from "./Redux/actions";
 
 import React, { useState, useEffect } from "react";
@@ -14,13 +14,13 @@ function App() {
   const data = useSelector((state) => state.paid.value);
 
   useEffect(() => {
-    dispatch(fetchUserById());
+    dispatch(getAllData());
   }, [dispatch]);
 
   return (
     <div className="App">
       {/* <div>{data.id}</div> */}
-      {data && <Home />}
+      {data && <Member />}
     </div>
   );
 }
