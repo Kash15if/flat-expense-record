@@ -2,6 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserById } from "./actions";
 const initialState = {
   value: [],
+  lineData: [],
+  PieData: {
+    kashif: 0,
+    azarul: 0,
+  },
 };
 
 export const paidData = createSlice({
