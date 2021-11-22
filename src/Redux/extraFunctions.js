@@ -21,14 +21,18 @@ export const getChartData = (dataFromDb) => {
           ? innerData.kashif
           : 0;
 
+      //console.log(kashVal);
+      const newAmount = data[i].piadForBoth
+        ? data[i].amount
+        : data[i].amount * 2;
       lineChartDaata[date] = {
         azarul: azVal,
-        kashif: kashVal + data[i].amount,
+        kashif: kashVal + newAmount,
       };
 
       pieActual = {
         ...pieActual,
-        kashif: pieActual.kashif + data[i].amount,
+        kashif: pieActual.kashif + newAmount,
       };
     } else {
       let azVal =
@@ -39,21 +43,26 @@ export const getChartData = (dataFromDb) => {
         date in lineChartDaata && "kashif" in lineChartDaata[date]
           ? innerData.kashif
           : 0;
+      const newAmount = data[i].piadForBoth
+        ? data[i].amount
+        : data[i].amount * 2;
 
       lineChartDaata[date] = {
         kashif: kashVal,
-        azarul: azVal + data[i].amount,
+        azarul: azVal + newAmount,
       };
 
       pieActual = {
         ...pieActual,
-        azarul: pieActual.azarul + data[i].amount,
+        azarul: pieActual.azarul + newAmount,
       };
     }
-
-    return {
-      lineChartDaata,
-      pieActual,
-    };
   }
+
+  // console.log(lineChartDaata);
+  // console.log(pieActual);
+  return {
+    lineChartDaata,
+    pieActual,
+  };
 };

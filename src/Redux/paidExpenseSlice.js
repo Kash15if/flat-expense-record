@@ -16,6 +16,7 @@ export const paidData = createSlice({
   reducers: {},
   extraReducers: {
     [getAllData.fulfilled]: (state, action) => {
+      //console.log(action.payload);
       const { lineChartDaata, pieActual } = getChartData(action.payload);
       state.lineData = lineChartDaata;
       state.pieData = pieActual;

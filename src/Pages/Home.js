@@ -7,26 +7,28 @@ import PieChart from "../Components/PieChart";
 import Card from "../Components/Card";
 import Table from "../Components/Table";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
       <Grid container spacing={2} direction="row" alignItems="stretch" p={3}>
         <Grid item xs={12} md={6} mt={2}>
           <Paper>
-            <Card />
+            <Card CardData={props.pieChartData} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} mt={2}>
-          <PieChart />
+          <PieChart PieChartData={props.pieChartData} homeCard={true} />
         </Grid>
         <Grid item xs={12} mt={2}>
           <Paper>
-            <LineChart />
+            <LineChart LineChartData={props.lineChartData} />
           </Paper>
         </Grid>
         <Grid item xs={12} mt={2}>
           <Paper>
-            <Table />
+            {props.tableData !== "Loading" && (
+              <Table tableData={props.tableData} />
+            )}
           </Paper>
         </Grid>
       </Grid>
