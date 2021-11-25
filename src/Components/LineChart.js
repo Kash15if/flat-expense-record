@@ -27,7 +27,7 @@ const indivdual = (lineVal, nameX) => {
   Object.keys(lineVal).forEach(function (key) {
     const innerData = lineVal[key];
     arrData.push(innerData[nameX]);
-    console.log(nameX + " " + innerData[nameX]);
+    //console.log(nameX + " " + innerData[nameX]);
   });
 
   return arrData;
@@ -63,7 +63,7 @@ const LineChart = (props) => {
       {
         label: "Joint",
         data: sumData,
-        backgroundColor: "#rgb(0,184,141)",
+        backgroundColor: "rgb(0,184,141)",
         borderColor: "rgb(0,184,141)",
       },
     ],

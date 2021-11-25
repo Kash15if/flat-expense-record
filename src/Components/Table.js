@@ -9,12 +9,44 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
   { field: "date", headerName: "Date", flex: 1, minWidth: 150 },
-  { field: "time", headerName: "Time", flex: 1, minWidth: 150 },
-  { field: "product", headerName: "product", flex: 1, minWidth: 150 },
+  {
+    field: "time",
+    filterable: false,
+    sortable: false,
+    headerName: "Time",
+    flex: 1,
+    minWidth: 150,
+  },
+  {
+    field: "product",
+    headerName: "product",
+    sortable: false,
+    flex: 1,
+    minWidth: 150,
+  },
   { field: "amount", headerName: "amount", flex: 1, minWidth: 150 },
-  { field: "paidBy", headerName: "paidBy", flex: 1, minWidth: 150 },
-  { field: "piadForBoth", headerName: "piadForBoth", flex: 1, minWidth: 150 },
-  { field: "description", headerName: "description", flex: 1, minWidth: 150 },
+  {
+    field: "paidBy",
+    headerName: "paidBy",
+    sortable: false,
+    flex: 1,
+    minWidth: 150,
+  },
+  {
+    field: "piadForBoth",
+    headerName: "piadForBoth",
+    sortable: false,
+    flex: 1,
+    minWidth: 150,
+  },
+  {
+    field: "description",
+    filterable: false,
+    sortable: false,
+    headerName: "description",
+    flex: 1,
+    minWidth: 150,
+  },
 ];
 
 //[
