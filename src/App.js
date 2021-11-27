@@ -46,7 +46,7 @@ function App() {
           />
 
           <Route
-            path="/admin/login"
+            path="/admin/add/login"
             element={data.value !== "Loading" && <AdminPage />}
           />
 
