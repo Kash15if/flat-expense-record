@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
+import { Typography } from "@mui/material";
 
 const Card = (props) => {
   const dataAmount = props.CardData;
@@ -10,13 +11,16 @@ const Card = (props) => {
   const otherName = myName === "kashif" ? "azarul" : "kashif";
   const myAmount = dataAmount[myName];
   const otherAmount = dataAmount[otherName];
-  let outString = "";
 
-  if (props.CardData[myName] > props.CardData[otherName]) {
-    outString = otherName + "will pay you";
-  } else {
-    outString = "You have to pay" + otherName;
-  }
+  //for member card
+  const bgColorAmount = myAmount < otherAmount ? "red" : "Green";
+
+  //for Member Card
+  //out string for card
+  let outString =
+    props.CardData[myName] > props.CardData[otherName]
+      ? otherName + " will pay you"
+      : "You have to pay " + otherName;
 
   const homeCard = props.homeCard;
   return (
@@ -34,13 +38,24 @@ const Card = (props) => {
           mt={2}
         >
           <Grid item xs={8} textAlign="left">
-            You have to pay {props.name === "kashif" ? "otherAmount" : "Kashif"}
+            {outString}
             :-{" "}
           </Grid>
 
           <Grid item xs={4}>
-            <Box sx={{ bgcolor: "Green", width: "60%", borderRadius: 1 }} p={2}>
-              ₹ 240
+            <Box
+              sx={{
+                bgcolor: bgColorAmount,
+                width: "60%",
+                borderRadius: 1,
+                color: "white",
+              }}
+              p={1.5}
+            >
+              <b style={{ fontSize: "18px" }}>
+                {" "}
+                {Math.abs(myAmount - otherAmount)}{" "}
+              </b>
             </Box>
           </Grid>
         </Grid>
