@@ -4,12 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllData } from "./Redux/actions";
 //import { fetchUserById } from "./Redux/actions";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Home from "./Pages/Home";
 import Member from "./Pages/Members";
 import AdminPage from "./Admin/ManageExpense";
-
-import { Button } from "@mui/material";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -20,7 +18,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllData());
-    console.log(data.value);
   }, [dispatch]);
 
   //console.log(data.value);

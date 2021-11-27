@@ -1,7 +1,5 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Box } from "@mui/system";
-import { Paper } from "@mui/material";
 
 const options = {
   scales: {

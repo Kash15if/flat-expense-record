@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -18,7 +17,7 @@ import LogInForm from "./AdminLogin";
 import { pushDataTODb } from "./Store";
 
 import db from "../firebase/firebaseConfig";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 
 const AdminPage = () => {
   const [values, setValues] = useState({
@@ -38,9 +37,9 @@ const AdminPage = () => {
     setLoggedIn(true);
   };
 
-  useEffect(async () => {
-    const q = await collection(db, "expense-details");
-    const unsubscribe = await onSnapshot(q, (querySnapshot) => {
+  useEffect(() => {
+    const q = collection(db, "expense-details");
+    onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
         data.push({
@@ -76,7 +75,7 @@ const AdminPage = () => {
     var { checked } = event.target;
     setValues({
       ...values,
-      ["paidForBoth"]: checked,
+      paidForBoth: checked,
     });
   };
 

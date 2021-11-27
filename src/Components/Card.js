@@ -1,8 +1,6 @@
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
-import { Typography } from "@mui/material";
 
 const Card = (props) => {
   const dataAmount = props.CardData;

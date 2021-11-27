@@ -1,5 +1,4 @@
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import { Paper } from "@mui/material";
 
 import LineChart from "../Components/LineChart";
