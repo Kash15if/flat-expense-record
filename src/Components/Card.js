@@ -4,15 +4,26 @@ import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 
 const Card = (props) => {
-  const Azarul = props.CardData.azarul;
-  const Kashif = props.CardData.kashif;
+  const dataAmount = props.CardData;
+  // const Kashif = props.CardData.kashif;
+  const myName = props.name;
+  const otherName = myName === "kashif" ? "azarul" : "kashif";
+  const myAmount = dataAmount[myName];
+  const otherAmount = dataAmount[otherName];
+  let outString = "";
+
+  if (props.CardData[myName] > props.CardData[otherName]) {
+    outString = otherName + "will pay you";
+  } else {
+    outString = "You have to pay" + otherName;
+  }
 
   const homeCard = props.homeCard;
   return (
     <Grid container spacing={2} p={2}>
       {/* Grid Start */}
 
-      {homeCard && (
+      {!homeCard && (
         <Grid
           container
           direction="row"
@@ -23,7 +34,8 @@ const Card = (props) => {
           mt={2}
         >
           <Grid item xs={8} textAlign="left">
-            You have to pay Azarul:-{" "}
+            You have to pay {props.name === "kashif" ? "otherAmount" : "Kashif"}
+            :-{" "}
           </Grid>
 
           <Grid item xs={4}>
@@ -44,11 +56,11 @@ const Card = (props) => {
         my={2}
       >
         <Grid item xs={4} textAlign="left">
-          Kashif Paid
+          {myName === "kashif" ? "Kashif" : "Azarul"} Paid :-
         </Grid>
 
         <Grid item xs={4} textAlign="left">
-          Azarul Paid:-
+          {otherName === "kashif" ? "Kashif" : "Azarul"} Paid :-
         </Grid>
 
         <Grid item xs={4} textAlign="left">
@@ -66,19 +78,19 @@ const Card = (props) => {
       >
         <Grid item xs={4}>
           <Avatar sx={{ bgcolor: "green", width: 70, height: 70 }}>
-            ₹ {Kashif}
+            ₹ {myAmount}
           </Avatar>
         </Grid>
 
         <Grid item xs={4}>
           <Avatar sx={{ bgcolor: "green", width: 70, height: 70 }}>
-            ₹ {Azarul}
+            ₹ {otherAmount}
           </Avatar>
         </Grid>
 
         <Grid item xs={4}>
           <Avatar sx={{ bgcolor: "green", width: 70, height: 70 }}>
-            ₹ {Azarul + Kashif}
+            ₹ {otherAmount + myAmount}
           </Avatar>
         </Grid>
       </Grid>

@@ -10,6 +10,9 @@ import Member from "./Pages/Members";
 import AdminPage from "./Admin/ManageExpense";
 
 import { Button } from "@mui/material";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -26,16 +29,60 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              data.value !== "Loading" && (
+                <Home
+                  pieChartData={data.pieData}
+                  lineChartData={data.lineData}
+                  tableData={data.value}
+                />
+                /* <AdminPage /> */
+              )
+            }
+          />
+
+          <Route
+            path="/admin/login"
+            element={data.value !== "Loading" && <AdminPage />}
+          />
+
+          <Route
+            path="/kashif"
+            element={
+              data.value !== "Loading" && (
+                <Member
+                  name="kashif"
+                  pieChartData={data.pieData}
+                  lineChartData={data.lineData}
+                  tableData={data.value}
+                />
+              )
+            }
+          />
+
+          <Route
+            path="/azarul"
+            element={
+              data.value !== "Loading" && (
+                <Member
+                  name="azarul"
+                  pieChartData={data.pieData}
+                  lineChartData={data.lineData}
+                  tableData={data.value}
+                />
+                /* <AdminPage /> */
+              )
+            }
+          />
+        </Routes>
+      </Router>
+
       {/* <div>{data.id}</div> */}
-      {data.value !== "Loading" && (
-        <Home
-          pieChartData={data.pieData}
-          lineChartData={data.lineData}
-          tableData={data.value}
-        />
-        /* <AdminPage /> */
-      )}
-      <AdminPage />
+      {/* <AdminPage /> */}
     </div>
   );
 }

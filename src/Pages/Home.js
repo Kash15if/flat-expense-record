@@ -13,11 +13,11 @@ const Home = (props) => {
       <Grid container spacing={2} direction="row" alignItems="stretch" p={3}>
         <Grid item xs={12} md={6} mt={2}>
           <Paper>
-            <Card CardData={props.pieChartData} />
+            <Card CardData={props.pieChartData} homeCard={true} name="kashif" />
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} mt={2}>
-          <PieChart PieChartData={props.pieChartData} homeCard={true} />
+          <PieChart PieChartData={props.pieChartData} />
         </Grid>
         <Grid item xs={12} mt={2}>
           <Paper>
