@@ -35,6 +35,7 @@ function App() {
         />
         /* <AdminPage /> */
       )}
+      <AdminPage />
     </div>
   );
 }

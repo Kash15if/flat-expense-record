@@ -36,6 +36,7 @@ const columns = [
     field: "piadForBoth",
     headerName: "piadForBoth",
     sortable: false,
+    type: "boolean",
     flex: 1,
     minWidth: 150,
   },
@@ -77,7 +78,7 @@ const Table = (props) => {
   // console.log(columns);
 
   return (
-    <div style={{ height: 300, width: "100%" }}>
+    <div style={{ height: 400, width: "100%" }}>
       <DataGrid rows={rows} columns={columns} />
     </div>
   );

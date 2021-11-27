@@ -30,11 +30,15 @@ export const getAllData = createAsyncThunk("getAllData", async () => {
 //   const unsubscribe = await onSnapshot(q, (querySnapshot) => {
 //     const data = [];
 //     querySnapshot.forEach((doc) => {
-//       data.push(doc.id, ...doc.data());
+//       data.push({ id: doc.id, ...doc.data() });
 //     });
-//     out.push(data);
+
+//     out = [...data];
+
+//     console.log("inner", out);
+//     return data;
 //   });
 
-//   console.log(unsubscribe);
-//   return unsubscribe;
+//   await console.log("val", out);
+//   return out;
 // });

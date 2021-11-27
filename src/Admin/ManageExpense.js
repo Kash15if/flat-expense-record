@@ -12,17 +12,16 @@ import { FormGroup } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 
-import { useSelector, useDispatch } from "react-redux";
-
-import { getAllData } from "../Redux/actions";
-
 import Table from "../Components/Table";
 
 import { pushDataTODb } from "./Store";
 
+import db from "../firebase/firebaseConfig";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+
 const AdminPage = () => {
   const [values, setValues] = useState({
-    amount: 0,
+    amount: "",
     date: "",
     description: "",
     paidBy: "",
@@ -31,44 +30,48 @@ const AdminPage = () => {
     time: "",
   });
 
-  const dispatch = useDispatch();
+  const [tabData, setTabData] = useState([]);
 
-  const data = useSelector((state) => state.paid);
+  useEffect(async () => {
+    const q = await collection(db, "expense-details");
+    const unsubscribe = await onSnapshot(q, (querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
 
-  useEffect(() => {
-    dispatch(getAllData());
-    console.log(data);
-  }, [dispatch]);
+      setTabData(data);
+      console.log("Current cities in CA: ", data);
+    });
+  }, []);
 
   const handleTextChange = (event) => {
     var { id, value } = event.target;
-
     setValues({
       ...values,
       [id]: value,
     });
-
-    console.log(values);
+    //console.log(values);
   };
 
   const handleDropdownChange = (event) => {
     var { name, value } = event.target;
-
     setValues({
       ...values,
       [name]: value,
     });
-    console.log(values);
+    // console.log(values);
   };
 
   const handleCheckBoxChange = (event) => {
     var { checked } = event.target;
-
     setValues({
       ...values,
-      paidForBoth: checked,
+      ["paidForBoth"]: checked,
     });
-    console.log(values);
   };
 
   const handleSubmitBtn = () => {
@@ -179,7 +182,7 @@ const AdminPage = () => {
         </Grid>
       </Grid>
 
-      {data.value !== "Loading" && <Table tableData={data.value} />}
+      {tabData && <Table tableData={tabData} />}
     </div>
   );
 };
