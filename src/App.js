@@ -17,6 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllData());
+    console.log(data.value);
   }, [dispatch]);
 
   //console.log(data.value);
@@ -26,13 +27,13 @@ function App() {
   return (
     <div className="App">
       {/* <div>{data.id}</div> */}
-      {data.value !== "loading" && (
-        // <Home
-        //   pieChartData={data.pieData}
-        //   lineChartData={data.lineData}
-        //   tableData={data.value}
-        // />
-        <AdminPage />
+      {data.value !== "Loading" && (
+        <Home
+          pieChartData={data.pieData}
+          lineChartData={data.lineData}
+          tableData={data.value}
+        />
+        /* <AdminPage /> */
       )}
     </div>
   );

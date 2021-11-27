@@ -6,23 +6,77 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Checkbox } from "@mui/material";
 import { FormGroup } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { getAllData } from "../Redux/actions";
+
 import Table from "../Components/Table";
 
-const AdminPage = () => {
-  const [product, setProduct] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [desc, setDesc] = useState("");
-  const [paidBy, setPaidBy] = useState("");
-  const [paidForBoth, setPaidForBoth] = useState(true);
+import { pushDataTODb } from "./Store";
 
-  const handleChange = (event) => {
-    setPaidForBoth(!paidForBoth);
+const AdminPage = () => {
+  const [values, setValues] = useState({
+    amount: 0,
+    date: "",
+    description: "",
+    paidBy: "",
+    paidForBoth: true,
+    product: "",
+    time: "",
+  });
+
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.paid);
+
+  useEffect(() => {
+    dispatch(getAllData());
+    console.log(data);
+  }, [dispatch]);
+
+  const handleTextChange = (event) => {
+    var { id, value } = event.target;
+
+    setValues({
+      ...values,
+      [id]: value,
+    });
+
+    console.log(values);
+  };
+
+  const handleDropdownChange = (event) => {
+    var { name, value } = event.target;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    console.log(values);
+  };
+
+  const handleCheckBoxChange = (event) => {
+    var { checked } = event.target;
+
+    setValues({
+      ...values,
+      paidForBoth: checked,
+    });
+    console.log(values);
+  };
+
+  const handleSubmitBtn = () => {
+    const dateX = new Date();
+    const date1 = dateX.toLocaleDateString();
+    const time1 = dateX.toLocaleTimeString();
+    pushDataTODb({ ...values, date: date1, time: time1 });
+    // amount, date, desc, paidBy, paidForBoth, product, time
   };
 
   return (
@@ -42,16 +96,17 @@ const AdminPage = () => {
               <TextField
                 fullWidth
                 // helperText="Please enter your topic"
-                id="demo-helper-text-misaligned"
+                id="product"
                 label="Product"
                 color="primary"
+                onChange={handleTextChange}
               />
             </Grid>
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
                 // helperText="Please enter your topic"
-                id="demo-helper-text-misaligned"
+                id="amount"
                 label="Amount"
                 color="primary"
                 InputProps={{
@@ -59,34 +114,36 @@ const AdminPage = () => {
                     <InputAdornment position="start">₹</InputAdornment>
                   ),
                 }}
+                onChange={handleTextChange}
+                value={values.amount}
               />
             </Grid>
             <Grid item sm={6} xs={12}>
               <TextField
                 fullWidth
                 // helperText="Please enter your topic"
-                id="demo-helper-text-misaligned"
+                id="description"
                 label="Description"
                 color="primary"
+                onChange={handleTextChange}
+                value={values.description}
               />
             </Grid>
 
             <Grid item sm={6} xs={12}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Paid by
-                </InputLabel>
+                <InputLabel>Paid by</InputLabel>
                 <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  value={paidBy}
+                  labelId="paidBy"
+                  name="paidBy"
+                  value={values.paidBy}
                   label="Paid By"
-                  onChange={handleChange}
+                  onChange={handleDropdownChange}
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value="azarul">Azrul</MenuItem>
+                  <MenuItem value="azarul">Azarul</MenuItem>
                   <MenuItem value="kashif">Kashif</MenuItem>
                 </Select>
               </FormControl>
@@ -97,10 +154,9 @@ const AdminPage = () => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      defaultChecked
                       color="success"
-                      checked={paidForBoth}
-                      onChange={handleChange}
+                      checked={values.paidForBoth}
+                      onChange={handleCheckBoxChange}
                     />
                   }
                   label="Paid For Both"
@@ -114,7 +170,7 @@ const AdminPage = () => {
                 color="success"
                 component="span"
                 size="large"
-                onClick={handleChange}
+                onClick={handleSubmitBtn}
               >
                 Add
               </Button>
@@ -123,7 +179,7 @@ const AdminPage = () => {
         </Grid>
       </Grid>
 
-      <Table />
+      {data.value !== "Loading" && <Table tableData={data.value} />}
     </div>
   );
 };
