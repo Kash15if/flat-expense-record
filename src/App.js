@@ -2,11 +2,11 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import { getAllData } from "./Redux/actions";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./Pages/Home";
 import Member from "./Pages/Members";
 import AdminPage from "./Admin/ManageExpense";
-import { darkTheme } from "./Theme.js";
+import { darkTheme, lightTheme } from "./Theme.js";
 import CssBaseline from "@mui/material/CssBaseline";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -16,6 +16,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Slide from "@mui/material/Slide";
+
+import IconButton from "@mui/material/IconButton";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -42,16 +46,35 @@ function App() {
     dispatch(getAllData());
   }, [dispatch]);
 
+  const [darkMode, setDarkMode] = useState(false);
+  const [theme, setTheme] = useState(lightTheme);
+
+  const toggleColorMode = () => {
+    const currTheme = darkMode ? lightTheme : darkTheme;
+    setTheme(currTheme);
+    setDarkMode(!darkMode);
+  };
+
   return (
     <div className="App">
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <HideOnScroll>
           <AppBar>
-            <Toolbar>
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h6" component="div">
                 Flat Expense Record
               </Typography>
+              <IconButton
+                sx={{ ml: 1 }}
+                onClick={toggleColorMode}
+                color="inherit"
+              >
+                {
+                  // theme.palette.mode
+                  !darkMode ? <Brightness7Icon /> : <Brightness4Icon />
+                }
+              </IconButton>
             </Toolbar>
           </AppBar>
         </HideOnScroll>
