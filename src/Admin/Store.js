@@ -3,7 +3,10 @@ import { collection, addDoc } from "firebase/firestore";
 
 export const pushDataTODb = async (values) => {
   //posting it to firebase
-  const docRef = await addDoc(collection(db, "expense-details"), values);
+  const docRef = await addDoc(collection(db, "expense-details"), {
+    ...values,
+    amount: parseInt(values.amount),
+  });
   //console.log("Document written with ID: ", docRef.id);
 
   return docRef;

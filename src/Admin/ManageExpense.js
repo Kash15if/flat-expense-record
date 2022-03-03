@@ -116,6 +116,7 @@ const AdminPage = () => {
                 <Grid item sm={6} xs={12}>
                   <TextField
                     fullWidth
+                    type="number"
                     // helperText="Please enter your topic"
                     id="amount"
                     label="Amount"

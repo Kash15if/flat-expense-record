@@ -22,8 +22,11 @@ export const getChartData = (dataFromDb) => {
           : 0;
 
       //console.log(kashVal);
-      const newAmount = data[i].piadForBoth ? data[i].amount : data[i].amount;
+      // const newAmount = data[i].piadForBoth ? data[i].amount : data[i].amount;
       // : data[i].amount * 2;
+
+      const newAmount = parseInt(data[i].amount);
+      console.log(newAmount + 0);
 
       lineChartDaata[date] = {
         azarul: azVal,
@@ -43,9 +46,12 @@ export const getChartData = (dataFromDb) => {
         date in lineChartDaata && "kashif" in lineChartDaata[date]
           ? innerData.kashif
           : 0;
-      const newAmount = data[i].piadForBoth ? data[i].amount : data[i].amount;
+      // const newAmount = data[i].piadForBoth ? data[i].amount : data[i].amount;
 
       // : data[i].amount * 2;
+
+      const newAmount = parseInt(data[i].amount);
+      console.log(newAmount + 0);
 
       lineChartDaata[date] = {
         kashif: kashVal,
