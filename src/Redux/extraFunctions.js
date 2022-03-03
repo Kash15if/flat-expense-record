@@ -24,7 +24,8 @@ export const getChartData = (dataFromDb) => {
       //console.log(kashVal);
       const newAmount = data[i].piadForBoth
         ? data[i].amount
-        : data[i].amount * 2;
+        : // : data[i].amount * 2;
+          data[i].amount;
       lineChartDaata[date] = {
         azarul: azVal,
         kashif: kashVal + newAmount,
@@ -45,7 +46,8 @@ export const getChartData = (dataFromDb) => {
           : 0;
       const newAmount = data[i].piadForBoth
         ? data[i].amount
-        : data[i].amount * 2;
+        : // : data[i].amount * 2;
+          data[i].amount;
 
       lineChartDaata[date] = {
         kashif: kashVal,
