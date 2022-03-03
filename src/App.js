@@ -16,6 +16,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Slide from "@mui/material/Slide";
+import Menu from "@mui/icons-material/Menu";
+import { MenuItem } from "@mui/material";
 
 import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -65,6 +67,13 @@ function App() {
               <Typography variant="h6" component="div">
                 Flat Expense Record
               </Typography>
+
+              <Typography textAlign="center">Dashboard</Typography>
+
+              <Typography textAlign="center">Kashif</Typography>
+
+              <Typography textAlign="center">Azarul</Typography>
+
               <IconButton
                 sx={{ ml: 1 }}
                 onClick={toggleColorMode}
